@@ -4,13 +4,17 @@
 # Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
 
 import optparse
+import sys
 
 def main():
-    parser = optparse.OptionParser(usage=, description=)
+    parser = optparse.OptionParser(usage="", description="")
     parser.add_option("", dest="", type="", default=, help=)
 
     (options, args) = parser.parse_args()
     del parser
+
+    for line in sys.stdin:
+        print line
 
 
 if __name__ == "__main__":
