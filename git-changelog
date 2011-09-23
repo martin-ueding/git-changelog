@@ -6,7 +6,9 @@ set -u
 
 # TODO abort if there is no git repo
 
+dir="$HOME/Branches/git-changelog"
+
 for tag in $(git tag)
 do
-	git show $tag | parse_tag_object
+	git show $tag | "$dir/parse_tag_object"
 done
