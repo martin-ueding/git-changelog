@@ -4,4 +4,9 @@
 set -e
 set -u
 
+# TODO abort if there is no git repo
 
+for tag in $(git tag)
+do
+	git show $tag | parse_tag_object
+done
