@@ -3,18 +3,18 @@
 
 # Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
 
-import optparse
 import sys
+import itertools
 
 def main():
-    parser = optparse.OptionParser(usage="", description="")
-    parser.add_option("", dest="", type="", default=, help=)
+    for line, i in zip(sys.stdin, itertools.count()):
+        if line == "-----BEGIN PGP SIGNATURE-----\n":
+            sys.exit(0)
 
-    (options, args) = parser.parse_args()
-    del parser
-
-    for line in sys.stdin:
-        print line
+        if i >= 4:
+            print "\t"+line,
+        elif i == 0:
+            print line[4:-1]
 
 
 if __name__ == "__main__":
