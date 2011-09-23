@@ -1,0 +1,13 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
+# Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
+
+import sys
+
+def main():
+    print ' '.join(sys.argv[1:][::-1])
+
+
+if __name__ == "__main__":
+	main()

@@ -8,7 +8,7 @@ set -u
 
 dir="$HOME/Branches/git-changelog"
 
-for tag in $(git tag)
+for tag in $("$dir/reverse" $(git tag))
 do
 	git show $tag | "$dir/parse_tag_object"
 done
