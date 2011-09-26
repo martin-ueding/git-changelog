@@ -4,12 +4,10 @@
 set -e
 set -u
 
-dir="$HOME/Branches/git-changelog"
-
 for tag in $(git tag | tac)
 do
 	if [[ $tag =~ v?[0-9]+(\.[0-9]+)* ]]
 	then
-		git show $tag | "$dir/parse_tag_object"
+		git show $tag | parse_tag_object
 	fi
 done
