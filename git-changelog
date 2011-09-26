@@ -4,8 +4,6 @@
 set -e
 set -u
 
-# TODO abort if there is no git repo
-
 dir="$HOME/Branches/git-changelog"
 
 for tag in $("$dir/reverse" $(git tag))
