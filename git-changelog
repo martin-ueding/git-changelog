@@ -6,7 +6,7 @@ set -u
 
 dir="$HOME/Branches/git-changelog"
 
-for tag in $("$dir/reverse" $(git tag))
+for tag in $(git tag | tac)
 do
 	if [[ $tag =~ v?[0-9]+(\.[0-9]+)* ]]
 	then
