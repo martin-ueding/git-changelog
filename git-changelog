@@ -10,5 +10,8 @@ dir="$HOME/Branches/git-changelog"
 
 for tag in $("$dir/reverse" $(git tag))
 do
-	git show $tag | "$dir/parse_tag_object"
+	if [[ $tag =~ v[0-9]+(\.[0-9]+)* ]]
+	then
+		git show $tag | "$dir/parse_tag_object"
+	fi
 done
