@@ -12,7 +12,7 @@ def main():
     all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
 
     # The above list only gives us a list of all tags. We are interested in the correct order in the repo and only the tags that are on the current branch. `git log` gives that, but also branch names.
-    log = subprocess.check_output(["git", "log", "--simplify-by-decoration", "--decorate", "--format=%d"]).split('\n')
+    log = subprocess.check_output(["git", "log", "--simplify-by-decoration", "--format=%d"]).split('\n')
 
     tags = []
     for log_entry in log:
