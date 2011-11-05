@@ -22,13 +22,16 @@ If you have tags like `v1.0` with a message like `* New Version` you will get th
 ## OPTIONS
 
 `-a` `--all`:
-Show tags from all branches.
+Show tags from all branches.  
+`--filter regex`:
+Filters tags with regex.
 
 ### Config
 
 You can set these options in your git config:
 
-- `changelog.showall`
+- `changelog.filter regex`
+- `changelog.showall true|false`
 
 
 ## AUTHOR
