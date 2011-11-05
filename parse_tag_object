@@ -5,16 +5,32 @@
 
 import sys
 import itertools
+import subprocess
 
 def main():
-    for line, i in zip(sys.stdin, itertools.count()):
-        if line == "-----BEGIN PGP SIGNATURE-----\n":
-            sys.exit(0)
+    # Get the tag description.
+    tag_list = subprocess.check_output(["git", "tag"])
 
-        if i >= 4:
-            print "\t"+line,
-        elif i == 0:
-            print line[4:-1]
+    # Split the lines, removed the last empty line and reverse the list.
+    tags = tag_list.split('\n')[:-1][::-1]
+
+    # Iterate through the tags.
+    for tag in tags:
+        # Get the description for the tag.
+        git_show = subprocess.check_output(["git", "show", tag]).split('\n')
+
+        for line, i in zip(git_show, itertools.count()):
+            # If the PGP signature starts, the entry is over.
+            if line == "-----BEGIN PGP SIGNATURE-----":
+                break
+
+            # Print the line from the tag message.
+            if i >= 4:
+                print "\t"+line
+
+            # Print the tag name.
+            elif i == 0:
+                print line[4:]
 
 
 if __name__ == "__main__":
