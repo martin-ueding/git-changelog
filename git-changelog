@@ -4,10 +4,21 @@
 # Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
 
 import sys
+import os
 import itertools
 import subprocess
 
+def has_git_dir():
+    with open(os.devnull, 'w') as null:
+        return subprocess.call(["git", "rev-parse", "--show-toplevel"], stdout=null, stderr=null) == 0
+
+    return True
+
 def main():
+    if not has_git_dir():
+        print "Error: This is not a git repository."
+        sys.exit(1)
+
     # Get the tag description. Split the lines, remove the last empty line.
     all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
 
