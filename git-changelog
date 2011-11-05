@@ -3,10 +3,10 @@
 
 # Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
 
-import sys
-import os
 import itertools
+import os
 import subprocess
+import sys
 
 def has_git_dir():
     with open(os.devnull, 'w') as null:
