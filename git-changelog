@@ -31,13 +31,7 @@ def parse_args():
     global options
     options = parser.parse_args()
 
-def main():
-    parse_args()
-
-    if not has_git_dir():
-        print "Error: This is not a git repository."
-        sys.exit(1)
-
+def generate_tag_list():
     # Get the tag description. Split the lines, remove the last empty line.
     all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
 
@@ -60,8 +54,17 @@ def main():
                 if ref in all_tags:
                     tags.append(ref)
 
+    return tags
+
+def main():
+    parse_args()
+
+    if not has_git_dir():
+        print "Error: This is not a git repository."
+        sys.exit(1)
+
     # Iterate through the tags.
-    for tag in tags:
+    for tag in generate_tag_list():
         # Get the description for the tag.
         git_show = subprocess.check_output(["git", "show", tag]).split('\n')
 
