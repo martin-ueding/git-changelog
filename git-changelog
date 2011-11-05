@@ -3,6 +3,8 @@
 
 # Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
 
+# TODO Only list tags that are on the current branch.
+
 import sys
 import itertools
 import subprocess
