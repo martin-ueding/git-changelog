@@ -23,7 +23,7 @@ def is_list_all():
 
     try:
         with open(os.devnull, 'w') as null:
-            return subprocess.check_output(["git", "config", "--get", "changelog.list_all"], stderr=null).strip() == "true"
+            return subprocess.check_output(["git", "config", "--get", "changelog.listall"], stderr=null).strip() == "true"
     except subprocess.CalledProcessError as e:
         return False
 
