@@ -8,25 +8,22 @@ import itertools
 import subprocess
 
 def main():
-    # Get the tag description.
-    tag_list = subprocess.check_output(["git", "tag"])
-
-    # Split the lines, removed the last empty line and reverse the list.
-    all_tags = tag_list.split('\n')[:-1]
+    # Get the tag description. Split the lines, remove the last empty line.
+    all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
 
     # The above list only gives us a list of all tags. We are interested in the correct order in the repo and only the tags that are on the current branch. `git log` gives that, but also branch names.
     log = subprocess.check_output(["git", "log", "--simplify-by-decoration", "--decorate", "--format=%d"]).split('\n')
 
     tags = []
-    for entry in log:
+    for log_entry in log:
         # There are a couple of empty lines there.
-        if len(entry) == 0:
+        if len(log_entry) == 0:
             continue
 
-        entry_list = entry[2:-1].split(', ')
-        for entry in entry_list:
-            if entry in all_tags:
-                tags.append(entry)
+        log_entry_refs = log_entry[2:-1].split(', ')
+        for ref in log_entry_refs:
+            if ref in all_tags:
+                tags.append(ref)
 
     # Iterate through the tags.
     for tag in tags:
