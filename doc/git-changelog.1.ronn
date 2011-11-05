@@ -26,7 +26,7 @@ Show tags from all branches.
 `--filter regex`:
 Filters tags with regex.
 
-### Config
+## CONFIG
 
 You can set these options in your git config:
 
