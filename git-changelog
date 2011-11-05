@@ -14,6 +14,13 @@ def has_git_dir():
 
     return True
 
+def is_list_all():
+    try:
+        with open(os.devnull, 'w') as null:
+            return subprocess.check_output(["git", "config", "--get", "changelog.list_all"], stderr=null).strip() == "true"
+    except subprocess.CalledProcessError as e:
+        return False
+
 def main():
     if not has_git_dir():
         print "Error: This is not a git repository."
@@ -27,16 +34,19 @@ def main():
     # branch. `git log` gives that, but also branch names.
     log = subprocess.check_output(["git", "log", "--simplify-by-decoration", "--format=%d"]).split('\n')
 
-    tags = []
-    for log_entry in log:
-        # There are a couple of empty lines there.
-        if len(log_entry) == 0:
-            continue
+    if is_list_all():
+        tags = all_tags
+    else:
+        tags = []
+        for log_entry in log:
+            # There are a couple of empty lines there.
+            if len(log_entry) == 0:
+                continue
 
-        log_entry_refs = log_entry[2:-1].split(', ')
-        for ref in log_entry_refs:
-            if ref in all_tags:
-                tags.append(ref)
+            log_entry_refs = log_entry[2:-1].split(', ')
+            for ref in log_entry_refs:
+                if ref in all_tags:
+                    tags.append(ref)
 
     # Iterate through the tags.
     for tag in tags:
