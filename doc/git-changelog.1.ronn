@@ -6,7 +6,7 @@ git-changelog - displays changelog based on git tags
 
 ## SYNOPSIS
 
-`git changelog` [OPTIONS]
+`git changelog [options]`
 
 
 ## DESCRIPTION
