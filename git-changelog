@@ -47,7 +47,7 @@ def main():
     log = subprocess.check_output(["git", "log", "--simplify-by-decoration", "--format=%d"]).split('\n')
 
     if is_list_all():
-        tags = all_tags
+        tags = sorted(all_tags)[::-1]
     else:
         tags = []
         for log_entry in log:
