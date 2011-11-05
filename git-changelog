@@ -32,7 +32,7 @@ def main():
 
             # Print the line from the tag message.
             if i >= 4:
-                print "\t"+line
+                print "    "+line
 
             # Print the tag name.
             elif i == 0:
