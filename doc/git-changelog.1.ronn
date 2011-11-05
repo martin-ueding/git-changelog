@@ -1,0 +1,24 @@
+# git-changelog
+
+## NAME
+
+git-changelog - displays changelog based on git tags
+
+## SYNOPSIS
+
+`git changelog`
+
+
+## DESCRIPTION
+
+Lists all annotated tags that are on a given branch and prints their message.
+
+If you have tags like `v1.0` with a message like `* New Version` you will get this output:
+
+	v1.0
+	    * New Version
+
+
+## AUTHOR
+
+Martin Ueding <dev@martin-ueding.de>
