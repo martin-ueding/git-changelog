@@ -56,15 +56,9 @@ def generate_tag_list():
 
     return tags
 
-def main():
-    parse_args()
-
-    if not has_git_dir():
-        print "Error: This is not a git repository."
-        sys.exit(1)
-
+def generate_changelog(tags):
     # Iterate through the tags.
-    for tag in generate_tag_list():
+    for tag in tags:
         # Get the description for the tag.
         git_show = subprocess.check_output(["git", "show", tag]).split('\n')
 
@@ -92,6 +86,15 @@ def main():
             # Print the tag name.
             elif i == 0:
                 print line[4:]
+
+def main():
+    parse_args()
+
+    if not has_git_dir():
+        print "Error: This is not a git repository."
+        sys.exit(1)
+
+    generate_changelog(generate_tag_list())
 
 
 if __name__ == "__main__":
