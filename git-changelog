@@ -9,11 +9,13 @@ import os
 import subprocess
 import sys
 
+
 def has_git_dir():
     with open(os.devnull, 'w') as null:
         return subprocess.call(["git", "rev-parse", "--show-toplevel"], stdout=null, stderr=null) == 0
 
     return True
+
 
 def is_list_all():
     if options.list_all:
@@ -25,11 +27,13 @@ def is_list_all():
     except subprocess.CalledProcessError as e:
         return False
 
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Generate changelog from annotated tags.")
     parser.add_argument('-a', '--all', dest="list_all", default=False, action='store_true', help="Show tags from all branches (default: %(default)s")
     global options
     options = parser.parse_args()
+
 
 def generate_tag_list():
     # Get the tag description. Split the lines, remove the last empty line.
@@ -55,6 +59,7 @@ def generate_tag_list():
                     tags.append(ref)
 
     return tags
+
 
 def generate_changelog(tags):
     # Iterate through the tags.
@@ -86,6 +91,7 @@ def generate_changelog(tags):
             # Print the tag name.
             elif i == 0:
                 print line[4:]
+
 
 def main():
     parse_args()
