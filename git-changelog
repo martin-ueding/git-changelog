@@ -30,6 +30,12 @@ def main():
             if line == "-----BEGIN PGP SIGNATURE-----":
                 break
 
+            # If the current line is empty, the next might be commit, Author
+            # and Date. So this might be the last line.
+            if len(line) == 0 and git_show[i+1][:6] == "commit" and git_show[i+2][:7] == "Author:" and git_show[i+3][:5] == "Date:":
+                break
+
+
             # Print the line from the tag message.
             if i >= 4:
                 print "    "+line
