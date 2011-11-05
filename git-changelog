@@ -3,6 +3,7 @@
 
 # Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
 
+import argparse
 import itertools
 import os
 import subprocess
@@ -15,13 +16,24 @@ def has_git_dir():
     return True
 
 def is_list_all():
+    if options.list_all:
+        return True
+
     try:
         with open(os.devnull, 'w') as null:
             return subprocess.check_output(["git", "config", "--get", "changelog.list_all"], stderr=null).strip() == "true"
     except subprocess.CalledProcessError as e:
         return False
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="Generate changelog from annotated tags.")
+    parser.add_argument('-a', '--all', dest="list_all", default=False, action='store_true', help="Show tags from all branches (default: %(default)s")
+    global options
+    options = parser.parse_args()
+
 def main():
+    parse_args()
+
     if not has_git_dir():
         print "Error: This is not a git repository."
         sys.exit(1)
