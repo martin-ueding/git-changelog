@@ -3,7 +3,7 @@
 all: doc/git-changelog.1
 
 %.1: %.1.ronn
-	ronn $^
+	ronn $^ --style=toc --manual=git-changelog
 
 .PHONY: clean
 clean:
