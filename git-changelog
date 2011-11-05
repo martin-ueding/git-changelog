@@ -22,7 +22,9 @@ def main():
     # Get the tag description. Split the lines, remove the last empty line.
     all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
 
-    # The above list only gives us a list of all tags. We are interested in the correct order in the repo and only the tags that are on the current branch. `git log` gives that, but also branch names.
+    # The above list only gives us a list of all tags. We are interested in the
+    # correct order in the repo and only the tags that are on the current
+    # branch. `git log` gives that, but also branch names.
     log = subprocess.check_output(["git", "log", "--simplify-by-decoration", "--format=%d"]).split('\n')
 
     tags = []
@@ -52,8 +54,8 @@ def main():
             if line == "-----BEGIN PGP SIGNATURE-----":
                 break
 
-            # If the current line is empty, the next might be commit, Author
-            # and Date. So this might be the last line.
+            # If the current line is empty, the next might be commit. So this
+            # might be the last line.
             if len(line) == 0 and git_show[i+1][:7] == "commit ":
                 break
 
