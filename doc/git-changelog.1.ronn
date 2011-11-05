@@ -22,7 +22,7 @@ If you have tags like `v1.0` with a message like `* New Version` you will get th
 ## OPTIONS
 
 `-a` `--all`:
-	Show tags from all branches.
+Show tags from all branches.
 
 ### Config
 
