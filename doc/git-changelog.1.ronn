@@ -6,7 +6,7 @@ git-changelog - displays changelog based on git tags
 
 ## SYNOPSIS
 
-`git changelog`
+`git changelog` [OPTIONS]
 
 
 ## DESCRIPTION
@@ -17,6 +17,18 @@ If you have tags like `v1.0` with a message like `* New Version` you will get th
 
 	v1.0
 	    * New Version
+
+
+## OPTIONS
+
+`-a` `--all`:
+	Show tags from all branches.
+
+### Config
+
+You can set these options in your git config:
+
+- `changelog.showall`
 
 
 ## AUTHOR
