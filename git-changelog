@@ -9,6 +9,7 @@ import os
 import re
 import subprocess
 import sys
+import tempfile
 
 # TODO Use git's default pager if output is going to a TTY.
 
@@ -92,7 +93,7 @@ def generate_tag_list():
     return filter(generate_filter_tag_function(), tags)
 
 
-def generate_changelog(tags):
+def generate_changelog(tags, outfile):
     # Iterate through the tags.
     for tag in tags:
         # Get the description for the tag.
@@ -111,11 +112,11 @@ def generate_changelog(tags):
 
             # Print the line from the tag message.
             if i >= 5:
-                print "    "+line
+                outfile.write("    "+line+"\n")
 
             # Print the tag name.
             elif i == 2:
-                print line[4:]
+                outfile.write(line[4:]+"\n")
 
 
 def main():
@@ -125,7 +126,24 @@ def main():
         print "Error: This is not a git repository."
         sys.exit(1)
 
-    generate_changelog(generate_tag_list())
+    f = tempfile.NamedTemporaryFile(mode='w')
+
+    generate_changelog(generate_tag_list(), f)
+
+    f.flush()
+
+    try:
+        pager = subprocess.check_output(["git", "config", "--get", "core.pager"]).strip()
+    except subprocess.CalledProcessError:
+        pass
+    finally:
+        pager = "less"
+
+
+    proc = subprocess.Popen([pager, f.name])
+    proc.communicate()
+
+    f.close()
 
 
 if __name__ == "__main__":
