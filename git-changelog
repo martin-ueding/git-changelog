@@ -11,8 +11,6 @@ import subprocess
 import sys
 import tempfile
 
-# TODO Use git's default pager if output is going to a TTY.
-
 def has_git_dir():
     with open(os.devnull, 'w') as null:
         return subprocess.call(["git", "rev-parse", "--show-toplevel"], stdout=null, stderr=null) == 0
