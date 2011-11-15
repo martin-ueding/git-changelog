@@ -129,6 +129,7 @@ def main():
     generate_changelog(generate_tag_list(), f)
 
     f.flush()
+    f.seek(0, 0)
 
     try:
         pager = [subprocess.check_output(["git", "config", "--get", "core.pager"]).strip()]
@@ -138,8 +139,7 @@ def main():
         pager = "less -FRSX".split(' ')
 
 
-    # FIXME That does not work with `view -` for instance.
-    proc = subprocess.Popen(pager+[f.name])
+    proc = subprocess.Popen(pager, stdin=f)
     proc.communicate()
 
     f.close()
