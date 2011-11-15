@@ -140,6 +140,7 @@ def main():
         pager = "less"
 
 
+    # FIXME That does not work with `view -` for instance.
     proc = subprocess.Popen([pager, f.name])
     proc.communicate()
 
