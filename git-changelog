@@ -124,22 +124,20 @@ def main():
         print "Error: This is not a git repository."
         sys.exit(1)
 
-    f = tempfile.NamedTemporaryFile(mode='w')
+    outfile = tempfile.NamedTemporaryFile(mode='w')
 
     generate_changelog(generate_tag_list(), f)
 
-    f.flush()
-    f.seek(0, 0)
+    outfile.flush()
+    outfile.seek(0, 0)
 
     try:
         pager = [subprocess.check_output(["git", "config", "--get", "core.pager"]).strip()]
     except subprocess.CalledProcessError:
-        pass
-    finally:
         pager = "less -FRSX".split(' ')
 
 
-    proc = subprocess.Popen(pager, stdin=f)
+    proc = subprocess.Popen(pager, stdin=outfile)
     proc.communicate()
 
     f.close()
