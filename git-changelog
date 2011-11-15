@@ -131,15 +131,15 @@ def main():
     f.flush()
 
     try:
-        pager = subprocess.check_output(["git", "config", "--get", "core.pager"]).strip()
+        pager = [subprocess.check_output(["git", "config", "--get", "core.pager"]).strip()]
     except subprocess.CalledProcessError:
         pass
     finally:
-        pager = "less"
+        pager = "less -FRSX".split(' ')
 
 
     # FIXME That does not work with `view -` for instance.
-    proc = subprocess.Popen([pager, f.name])
+    proc = subprocess.Popen(pager+[f.name])
     proc.communicate()
 
     f.close()
