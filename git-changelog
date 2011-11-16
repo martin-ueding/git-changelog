@@ -126,7 +126,7 @@ def main():
 
     outfile = tempfile.NamedTemporaryFile(mode='w')
 
-    generate_changelog(generate_tag_list(), f)
+    generate_changelog(generate_tag_list(), outfile)
 
     outfile.flush()
     outfile.seek(0, 0)
@@ -140,7 +140,7 @@ def main():
     proc = subprocess.Popen(pager, stdin=outfile)
     proc.communicate()
 
-    f.close()
+    outfile.close()
 
 
 if __name__ == "__main__":
