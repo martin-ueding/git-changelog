@@ -12,6 +12,7 @@ import sys
 import tempfile
 
 def has_git_dir():
+    """Checks for a git directory."""
     with open(os.devnull, 'w') as null:
         return subprocess.call(["git", "rev-parse", "--show-toplevel"], stdout=null, stderr=null) == 0
 
@@ -19,6 +20,7 @@ def has_git_dir():
 
 
 def is_list_all():
+    """Checks whether all tags (not only current branch) should be listed."""
     if options.list_all:
         return True
 
@@ -30,6 +32,7 @@ def is_list_all():
 
 
 def load_regex():
+    """Load the tag filter regex from from either command line or config."""
     if options.regex != None:
         return options.regex
 
@@ -41,6 +44,7 @@ def load_regex():
 
 
 def parse_args():
+    """Parses command line arguments into global `options` variable."""
     parser = argparse.ArgumentParser(description="Generate changelog from annotated tags.")
     parser.add_argument('-a', '--all', dest="list_all", default=False, action='store_true', help="Show tags from all branches (default: %(default)s")
     parser.add_argument('--filter', dest="regex", default=None, help="Regex to filter tags (default: %(default)s")
@@ -49,6 +53,7 @@ def parse_args():
 
 
 def generate_filter_tag_function():
+    """Creates a filter for tags."""
     regex = load_regex()
 
     if regex is None:
@@ -66,6 +71,10 @@ def generate_filter_tag_function():
 
 
 def generate_tag_list():
+    """
+    Builds a list of tags, either from all tags or just from the current
+    branch.
+    """
     # Get the tag description. Split the lines, remove the last empty line.
     all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
 
@@ -92,6 +101,7 @@ def generate_tag_list():
 
 
 def generate_changelog(tags, outfile):
+    """Generate the changelog, strip PGP signatures."""
     # Iterate through the tags.
     for tag in tags:
         # Get the description for the tag.
