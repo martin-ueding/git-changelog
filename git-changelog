@@ -175,6 +175,9 @@ def generate_changelog(tags, outfile):
 
 
 def main():
+    """
+    Parse arguments, check for git dir and generate changelog.
+    """
     parse_args()
 
     if not has_git_dir():
