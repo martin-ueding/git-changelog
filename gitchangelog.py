@@ -1,5 +1,14 @@
 #!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
+
+import itertools
+import os
+import re
+import subprocess
+import sys
+import tempfile
 
 __docformat__ = "javadoc"
 
@@ -15,13 +24,13 @@ def has_git_dir():
     return True
 
 
-def generate_filter_tag_function():
+def generate_filter_tag_function(options):
     """
     Creates a filter for tags.
 
     @return Filter function that decides over a given string.
     """
-    regex = load_regex()
+    regex = load_regex(options.regex)
 
     if regex is None:
         def filter_tag(tag):
@@ -54,7 +63,7 @@ def generate_filter_tag_function():
     return filter_tag
 
 
-def generate_tag_list():
+def generate_tag_list(options):
     """
     Builds a list of tags.
 
@@ -65,7 +74,7 @@ def generate_tag_list():
     # Get the tag description. Split the lines, remove the last empty line.
     all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
 
-    if is_list_all():
+    if is_list_all(options):
         tags = sorted(all_tags)[::-1]
     else:
         # The above list only gives us a list of all tags. We are interested in
@@ -84,7 +93,7 @@ def generate_tag_list():
                 if ref in all_tags:
                     tags.append(ref)
 
-    return filter(generate_filter_tag_function(), tags)
+    return filter(generate_filter_tag_function(options), tags)
 
 
 def generate_changelog(tags, outfile):
@@ -119,7 +128,7 @@ def generate_changelog(tags, outfile):
                 outfile.write(line[4:]+"\n")
 
 
-def is_list_all():
+def is_list_all(options):
     """
     Checks whether all tags (not only current branch) should be listed.
 
@@ -135,15 +144,15 @@ def is_list_all():
         return False
 
 
-def load_regex():
+def load_regex(regex = None):
     """
     Load the tag filter regex from from either command line or config.
 
     @return RegEx string.
     """
 
-    if options.regex != None:
-        return options.regex
+    if regex != None:
+        return regex
 
     try:
         with open(os.devnull, 'w') as null:
