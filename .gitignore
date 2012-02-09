@@ -1,5 +1,6 @@
+*.pyc
 CHANGELOG
+build
 doc/git-changelog.1
 doc/git-changelog.1.html
 git-changelog*.tar.gz
-*.pyc
