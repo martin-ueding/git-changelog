@@ -14,7 +14,6 @@ def parse_args():
     """
     Parses command line arguments into global `options` variable.
     """
-
     parser = argparse.ArgumentParser(description="Generate changelog from annotated tags.")
     parser.add_argument('-a', '--all', dest="list_all", default=False, action='store_true', help="Show tags from all branches (default: %(default)s")
     parser.add_argument('--filter', dest="regex", default=None, help="Regex to filter tags (default: %(default)s")
