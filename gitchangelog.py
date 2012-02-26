@@ -10,13 +10,13 @@ import subprocess
 import sys
 import tempfile
 
-__docformat__ = "javadoc"
+__docformat__ = "restructuredtext en"
 
 def has_git_dir():
     """
     Checks for a git directory.
 
-    @return Whether a git repo exists.
+    :return: Whether a git repo exists.
     """
     with open(os.devnull, 'w') as null:
         return subprocess.call(["git", "rev-parse", "--show-toplevel"], stdout=null, stderr=null) == 0
@@ -28,7 +28,7 @@ def generate_filter_tag_function(options):
     """
     Creates a filter for tags.
 
-    @return Filter function that decides over a given string.
+    :return: Filter function that decides over a given string.
     """
     regex = load_regex(options.regex)
 
@@ -39,8 +39,8 @@ def generate_filter_tag_function(options):
 
             This one returns True as it does not filter any tags out.
 
-            @param tag Tag to filter.
-            @return True.
+            :param tag: Tag to filter.
+            :return: True.
             """
             return True
 
@@ -54,8 +54,8 @@ def generate_filter_tag_function(options):
             If the given tag does not lie on the current branch, it is filtered
             out.
 
-            @param tag Tag to filter.
-            @return Whether tag is on branch.
+            :param tag: Tag to filter.
+            :return: Whether tag is on branch.
             """
             matcher = pattern.match(tag)
             return matcher is not None
@@ -69,7 +69,7 @@ def generate_tag_list(options):
 
     The list is either from all tags or just from the current branch.
 
-    @return Filtered tag list.
+    :return: Filtered tag list.
     """
     # Get the tag description. Split the lines, remove the last empty line.
     all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
@@ -100,8 +100,8 @@ def generate_changelog(tags, outfile):
     """
     Generate the changelog, strip PGP signatures.
 
-    @param tags Tags to list.
-    @param outfile Write for changelog.
+    :param tags: Tags to list.
+    :param outfile: Write for changelog.
     """
     # Iterate through the tags.
     for tag in tags:
@@ -132,7 +132,7 @@ def is_list_all(options):
     """
     Checks whether all tags (not only current branch) should be listed.
 
-    @return Whether all tags should be listed.
+    :return: Whether all tags should be listed.
     """
     if options.list_all:
         return True
@@ -148,7 +148,7 @@ def load_regex(regex = None):
     """
     Load the tag filter regex from from either command line or config.
 
-    @return RegEx string.
+    :return: RegEx string.
     """
 
     if regex != None:
