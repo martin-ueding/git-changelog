@@ -24,4 +24,3 @@ clean:
 	$(RM) -r html
 	$(RM) CHANGELOG
 	$(RM) doc/git-changelog.1
-	$(RM) doc/git-changelog.1.html
