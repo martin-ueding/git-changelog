@@ -150,7 +150,6 @@ def load_regex(regex = None):
 
     :return: RegEx string.
     """
-
     if regex != None:
         return regex
 
@@ -159,5 +158,3 @@ def load_regex(regex = None):
             return subprocess.check_output(["git", "config", "--get", "changelog.filter"], stderr=null).strip()
     except subprocess.CalledProcessError as e:
         return None
-
-
