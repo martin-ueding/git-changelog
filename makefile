@@ -26,6 +26,7 @@ clean:
 	$(RM) -r html
 	$(RM) CHANGELOG
 	$(RM) doc/git-changelog.1
+	$(RM) git-changelog*.tar.gz
 
 ###############################################################################
 #                               Private Targets                               #
