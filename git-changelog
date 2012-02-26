@@ -3,6 +3,11 @@
 
 # Copyright (c) 2011-2012 Martin Ueding <dev@martin-ueding.de>
 
+"""
+Script for the ``gitchangelog`` library. Accepts the command line options, lets
+the library generate the changelog and displays the output in a pager.
+"""
+
 import argparse
 import subprocess
 

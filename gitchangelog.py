@@ -3,6 +3,10 @@
 
 # Copyright © 2012 Martin Ueding <dev@martin-ueding.de>
 
+"""
+Logic for the changelog generation.
+"""
+
 import itertools
 import os
 import re
@@ -17,6 +21,7 @@ def has_git_dir():
     Checks for a git directory.
 
     :return: Whether a git repo exists.
+    :rtype: bool
     """
     with open(os.devnull, 'w') as null:
         return subprocess.call(["git", "rev-parse", "--show-toplevel"], stdout=null, stderr=null) == 0
@@ -28,7 +33,9 @@ def generate_filter_tag_function(options):
     """
     Creates a filter for tags.
 
+    :param options: Program options.
     :return: Filter function that decides over a given string.
+    :rtype: function
     """
     regex = load_regex(options.regex)
 
@@ -69,6 +76,7 @@ def generate_tag_list(options):
 
     The list is either from all tags or just from the current branch.
 
+    :param options: Program options.
     :return: Filtered tag list.
     """
     # Get the tag description. Split the lines, remove the last empty line.
@@ -101,7 +109,9 @@ def generate_changelog(tags, outfile):
     Generate the changelog, strip PGP signatures.
 
     :param tags: Tags to list.
-    :param outfile: Write for changelog.
+    :type tags: list
+    :param outfile: File to write changelog to.
+    :type outfile: File
     """
     # Iterate through the tags.
     for tag in tags:
@@ -132,6 +142,7 @@ def is_list_all(options):
     """
     Checks whether all tags (not only current branch) should be listed.
 
+    :param options: Program options.
     :return: Whether all tags should be listed.
     """
     if options.list_all:
@@ -148,6 +159,7 @@ def load_regex(regex = None):
     """
     Load the tag filter regex from from either command line or config.
 
+    :param regex: RegEx to use instead.
     :return: RegEx string.
     """
     if regex != None:
