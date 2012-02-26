@@ -1,4 +1,4 @@
-# Copyright (c) 2011 Martin Ueding <dev@martin-ueding.de>
+# Copyright (c) 2011-2012 Martin Ueding <dev@martin-ueding.de>
 
 version=1.3
 
@@ -17,5 +17,11 @@ tarball:
 clean:
 	$(RM) *.class *.jar
 	$(RM) *.o *.out
-	$(RM) *.pyc
 	$(RM) *.orig
+	$(RM) *.pyc
+	$(RM) -r build
+	$(RM) -r dist
+	$(RM) -r html
+	$(RM) CHANGELOG
+	$(RM) doc/git-changelog.1
+	$(RM) doc/git-changelog.1.html
