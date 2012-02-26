@@ -6,7 +6,7 @@ displays changelog based on git tags
 ====================================
 
 :Author: Martin Ueding <dev@martin-ueding.de>
-:Date:   2012-02-27
+:Date: 2012-02-27
 :Manual section: 1
 
 
