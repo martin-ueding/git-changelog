@@ -2,8 +2,9 @@
 git-changelog
 =============
 
+------------------------------------
 displays changelog based on git tags
-====================================
+------------------------------------
 
 :Author: Martin Ueding <dev@martin-ueding.de>
 :Date: 2012-02-27
@@ -11,12 +12,12 @@ displays changelog based on git tags
 
 
 SYNOPSIS
---------
+========
 ``git changelog [options]``
 
 
 DESCRIPTION
------------
+===========
 Lists all annotated tags that are on a given branch and prints their message.
 
 If you have tags like ``v1.0`` with a message like ``* New Version`` you will
@@ -27,7 +28,7 @@ get this output::
 
 
 OPTIONS
--------
+=======
 ``-a`` ``--all``
 	Show tags from all branches.  
 ``--filter regex``
@@ -35,7 +36,7 @@ OPTIONS
 
 
 CONFIG
-------
+======
 You can set these options in your git config:
 
 - ``changelog.filter regex``
