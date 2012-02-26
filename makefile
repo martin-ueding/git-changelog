@@ -10,8 +10,8 @@ CHANGELOG:
 tarball:
 	git archive --prefix=git-changelog-$(version)/ HEAD | gzip > git-changelog_$(version).tar.gz
 
-%.1: %.1.ronn
-	ronn $^ --style=toc --manual=git-changelog
+%.1: %.1.rst
+	rst2man $< $@
 
 .PHONY: clean
 clean:
