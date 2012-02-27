@@ -28,6 +28,11 @@ clean:
 	$(RM) doc/git-changelog.1
 	$(RM) git-changelog*.tar.gz
 
+install:
+	mkdir -p $(DESTDIR)/usr/share/man/man1/
+	gzip --stdout doc/git-changelog.1 > $(DESTDIR)/usr/share/man/man1/git-changelog.1.gz
+	python setup.py install --prefix "$(DESTDIR)"
+
 ###############################################################################
 #                               Private Targets                               #
 ###############################################################################
