@@ -24,11 +24,6 @@ To install ``git-changelog`` and the manual, use::
 
 usage
 =====
-Just call ``git changelog`` in a git repository.
+See the manpage_.
 
-
-get help
---------
-* ``git changelog -h`` for command line options.
-* ``git help changelog``, if you have the manual page installed.
-* ``man git-changelog``, if you have the manual page installed.
+.. _manpage: doc/git-changelog.1.rst
