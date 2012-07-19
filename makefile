@@ -31,7 +31,7 @@ clean:
 install:
 	install -d "$(DESTDIR)/usr/share/man/man1/"
 	gzip --stdout doc/git-changelog.1 > "$(DESTDIR)/usr/share/man/man1/git-changelog.1.gz"
-	python setup.py install --root "$(DESTDIR)"
+	python setup.py install --root "$(DESTDIR)" --install-layout deb
 
 %.1: %.1.rst
 	rst2man $< $@
