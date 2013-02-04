@@ -96,7 +96,7 @@ def generate_tag_list(options):
     :return: Filtered tag list.
     """
     # Get the tag description. Split the lines, remove the last empty line.
-    all_tags = subprocess.check_output(["git", "tag"]).split('\n')[:-1]
+    all_tags = subprocess.check_output(["git", "tag"]).split(b'\n')[:-1]
 
     if is_list_all(options):
         tags = sorted(all_tags)[::-1]
@@ -104,7 +104,7 @@ def generate_tag_list(options):
         # The above list only gives us a list of all tags. We are interested in
         # the correct order in the repo and only the tags that are on the
         # current branch. `git log` gives that, but also branch names.
-        log = subprocess.check_output(["git", "log", "--simplify-by-decoration", "--format=%d"]).split('\n')
+        log = subprocess.check_output(["git", "log", "--simplify-by-decoration", "--format=%d"]).split(b'\n')
 
         tags = []
         for log_entry in log:
@@ -112,7 +112,7 @@ def generate_tag_list(options):
             if len(log_entry) == 0:
                 continue
 
-            log_entry_refs = log_entry[2:-1].split(', ')
+            log_entry_refs = log_entry[2:-1].split(b', ')
             for ref in log_entry_refs:
                 if ref in all_tags:
                     tags.append(ref)
@@ -130,9 +130,10 @@ def generate_changelog(tags, outfile):
     :type outfile: File
     """
     # Iterate through the tags.
+    print (tags)
     for tag in tags:
         # Get the description for the tag.
-        git_show = subprocess.check_output(["git", "cat-file", "-p", tag]).split('\n')
+        git_show = subprocess.check_output(["git", "cat-file", "-p", tag]).split(b'\n')
 
         # If this is an annotated tag, it starts with "tag …", if it is a
         # lightweight tag, it starts with "commit …". Since lightweight tags do
