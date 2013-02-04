@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 
-# Copyright (c) 2011-2012 Martin Ueding <dev@martin-ueding.de>
+# Copyright (c) 2011-2013 Martin Ueding <dev@martin-ueding.de>
 
 ###############################################################################
 #                                   License                                   #
@@ -48,7 +48,7 @@ def main():
     options = parse_args()
 
     if not has_git_dir():
-        print "Error: This is not a git repository."
+        print("Error: This is not a git repository.")
         sys.exit(1)
 
     try:

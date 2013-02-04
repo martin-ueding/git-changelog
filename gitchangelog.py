@@ -117,7 +117,7 @@ def generate_tag_list(options):
                 if ref in all_tags:
                     tags.append(ref)
 
-    return filter(generate_filter_tag_function(options), tags)
+    return list(filter(generate_filter_tag_function(options), tags))
 
 
 def generate_changelog(tags, outfile):
