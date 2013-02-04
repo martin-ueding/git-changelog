@@ -130,7 +130,6 @@ def generate_changelog(tags, outfile):
     :type outfile: File
     """
     # Iterate through the tags.
-    print (tags)
     for tag in tags:
         # Get the description for the tag.
         git_show = subprocess.check_output(["git", "cat-file", "-p", tag]).split(b'\n')
@@ -138,21 +137,21 @@ def generate_changelog(tags, outfile):
         # If this is an annotated tag, it starts with "tag …", if it is a
         # lightweight tag, it starts with "commit …". Since lightweight tags do
         # not carry any description, we can discard them.
-        if git_show[2][:3] != "tag":
+        if git_show[2][:3] != b"tag":
             continue
 
         for line, i in zip(git_show, itertools.count()):
             # If the PGP signature starts, the entry is over.
-            if line == "-----BEGIN PGP SIGNATURE-----":
+            if line == b"-----BEGIN PGP SIGNATURE-----":
                 break
 
             # Print the line from the tag message.
             if i >= 5:
-                outfile.write("    "+line+"\n")
+                outfile.write(b"    "+line+b"\n")
 
             # Print the tag name.
             elif i == 2:
-                outfile.write(line[4:]+"\n")
+                outfile.write(line[4:]+b"\n")
 
 
 def is_list_all(options):
