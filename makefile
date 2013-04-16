@@ -24,6 +24,7 @@ clean:
 	$(RM) -r build
 	$(RM) -r dist
 	$(RM) -r html
+	$(RM) -r __pycache__
 	$(RM) CHANGELOG
 	$(RM) doc/git-changelog.1
 	$(RM) git-changelog*.tar.gz
